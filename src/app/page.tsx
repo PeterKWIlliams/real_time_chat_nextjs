@@ -1,8 +1,7 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { db } from "@/lib/db";
+"use client";
 import Button from "@/components/ui/Button";
+import { signOut } from "next-auth/react";
 
 export default function Home() {
-  return <Button variant={} />;
+  return <Button onClick={() => signOut()}>Sign out</Button>;
 }
