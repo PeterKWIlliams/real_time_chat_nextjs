@@ -1,20 +1,24 @@
 "use client";
 
 import { FC, useState } from "react";
-import Button from "./Button";
+import Button from "./ui/Button";
 import { addFriendValidator } from "@/lib/add-friend";
 import axios, { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type } from "os";
 
 interface AddFriendButtonProps {}
 
 type FormData = z.infer<typeof addFriendValidator>;
 
 const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
-  const { register, setError, handleSubmit } = useForm<FormData>({
+  const {
+    register,
+    setError,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
     resolver: zodResolver(addFriendValidator),
   });
 
@@ -59,6 +63,10 @@ const AddFriendButton: FC<AddFriendButtonProps> = ({}) => {
         />
         <Button>Add</Button>
       </div>
+      <div className="t mt-1 text-sm text-red-600">{errors.email?.message}</div>
+      {showSuccessState ? (
+        <p className="mt-1 text-sm text-green-600">friend request sent</p>
+      ) : null}
     </form>
   );
 };
