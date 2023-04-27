@@ -5,15 +5,15 @@ import { User } from "lucide-react";
 
 interface FriendRequestsSidebarOptionProps {
   sessionId: string;
-  intialUnseenRequestCount: number;
+  initialUnseenRequestCount: number;
 }
 
 const FriendRequestsSidebarOption: FC<FriendRequestsSidebarOptionProps> = ({
-  intialUnseenRequestCount,
+  initialUnseenRequestCount,
   sessionId,
 }) => {
   const [unseenRequestCount, setUnseenRequestCount] = useState<number>(
-    intialUnseenRequestCount
+    initialUnseenRequestCount
   );
   return (
     <Link
@@ -23,8 +23,8 @@ const FriendRequestsSidebarOption: FC<FriendRequestsSidebarOptionProps> = ({
       <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-indigo-600">
         <User className="h-4 w-4" />
       </div>
-
       <p className="truncate">Friend requests</p>
+
       {unseenRequestCount > 0 ? (
         <div className="flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs text-white">
           {unseenRequestCount}

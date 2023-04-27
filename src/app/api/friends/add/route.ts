@@ -1,5 +1,5 @@
 import { fetchRedis } from "@/helpers/redis";
-import { addFriendValidator } from "@/lib/add-friend";
+import { addFriendValidator } from "@/lib/validations/add-friend";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getServerSession } from "next-auth/next";
@@ -53,7 +53,6 @@ export async function POST(req: Request) {
     }
 
     //valid request, send friend request
-
     db.sadd(`user:${idToAdd}:incoming_friend_requests`, session.user.id);
     return new Response("OK");
   } catch (error) {

@@ -2,7 +2,7 @@
 
 import { FC, useState } from "react";
 import Button from "./ui/Button";
-import { addFriendValidator } from "@/lib/add-friend";
+import { addFriendValidator } from "@/lib/validations/add-friend";
 import axios, { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
