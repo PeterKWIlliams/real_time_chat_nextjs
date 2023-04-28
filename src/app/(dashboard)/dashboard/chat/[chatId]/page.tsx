@@ -1,3 +1,4 @@
+import Messages from "@/components/Messages";
 import { fetchRedis } from "@/helpers/redis";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -16,7 +17,7 @@ async function getChatMessages(chatId: string) {
   try {
     const result: string[] = await fetchRedis(
       "zrange",
-      "chat:${chatId}:messages",
+      `chat:${chatId}:messages`,
       0,
       -1
     );
@@ -30,11 +31,10 @@ async function getChatMessages(chatId: string) {
 }
 
 const page = async ({ params }: PageProps) => {
+  const { chatId } = params;
   const session = await getServerSession(authOptions);
 
   if (!session) notFound();
-
-  const { chatId } = params;
 
   const { user } = session;
 
@@ -73,6 +73,7 @@ const page = async ({ params }: PageProps) => {
           </div>
         </div>
       </div>
+      <Messages initialMessages={intialMessages} />
     </div>
   );
 };
