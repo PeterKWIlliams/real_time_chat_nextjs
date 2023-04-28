@@ -6,7 +6,7 @@ import { z } from "zod";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log("this is the body", body);
+
 
     const session = await getServerSession(authOptions);
 

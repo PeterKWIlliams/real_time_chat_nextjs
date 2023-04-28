@@ -1,15 +1,16 @@
 import { getToken } from "next-auth/jwt";
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+
 export default withAuth(
   async function middleware(req) {
     const pathname = req.nextUrl.pathname;
-    //manage route protection
+
+    // Manage route protection
     const isAuth = await getToken({ req });
     const isLoginPage = pathname.startsWith("/login");
-    console.log(pathname);
-    const sensitiveRoutes = ["/dashboard"];
 
+    const sensitiveRoutes = ["/dashboard"];
     const isAccessingSensitiveRoute = sensitiveRoutes.some((route) =>
       pathname.startsWith(route)
     );
@@ -18,6 +19,7 @@ export default withAuth(
       if (isAuth) {
         return NextResponse.redirect(new URL("/dashboard", req.url));
       }
+
       return NextResponse.next();
     }
 
@@ -39,5 +41,5 @@ export default withAuth(
 );
 
 export const config = {
-  matchter: ["/,/login", "/dashboard/:path*"],
+  matchter: ["/", "/login", "/dashboard/:path*"],
 };

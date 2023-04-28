@@ -38,7 +38,7 @@ const Layout = async ({ children }: LayoutProps) => {
   if (!session) notFound();
 
   const friends = await getFriendsByUserId(session.user.id);
-  console.log("friends", friends);
+
 
   const unseenRequestCount = (
     (await fetchRedis(
@@ -63,7 +63,7 @@ const Layout = async ({ children }: LayoutProps) => {
         <nav className="flex flex-1 flex-col">
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
             <li>
-              <SideBarChatList friends={friends} />
+              <SideBarChatList sessionId={session.user.id} friends={friends} />
             </li>
             <li>
               <div className="text-xs font-semibold leading-6 text-gray-400">
@@ -104,9 +104,9 @@ const Layout = async ({ children }: LayoutProps) => {
                   <Image
                     fill
                     referrerPolicy="no-referrer"
-                    className="rounded-full"
                     src={session.user.image || ""}
-                    alt="Your profile picture"
+                    alt="profile picture"
+                    className="rounded-full"
                   />
                 </div>
 

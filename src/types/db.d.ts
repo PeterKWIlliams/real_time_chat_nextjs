@@ -3,6 +3,7 @@ interface User {
   email: string;
   image: string;
   id: string;
+  test?:string;
 }
 interface Chat {
   id: string;
