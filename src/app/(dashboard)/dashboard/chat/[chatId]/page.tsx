@@ -1,3 +1,4 @@
+import ChatInput from "@/components/ChatInput";
 import Messages from "@/components/Messages";
 import { fetchRedis } from "@/helpers/redis";
 import { authOptions } from "@/lib/auth";
@@ -51,7 +52,7 @@ const page = async ({ params }: PageProps) => {
   return (
     <div className="flex h-full max-h-[calc(100vh-6rem)] flex-1 flex-col justify-between">
       <div className="flex justify-between border-b-2 border-gray-200 py-3 sm:items-center">
-        <div className="relaive flex items-center space-x-4">
+        <div className="relative flex items-center space-x-4">
           <div className="relative">
             <div className="relative h-8 w-8 sm:h-12 sm:w-12">
               <Image
@@ -73,7 +74,14 @@ const page = async ({ params }: PageProps) => {
           </div>
         </div>
       </div>
-      <Messages initialMessages={intialMessages} />
+      <Messages
+        initialMessages={intialMessages}
+        sessionId={session.user.id}
+        chatPartner={chatPartner}
+        sessionImg={session.user.image}
+        chatId={chatId}
+      />
+      <ChatInput chatId={chatId} chatPartner={chatPartner} />
     </div>
   );
 };

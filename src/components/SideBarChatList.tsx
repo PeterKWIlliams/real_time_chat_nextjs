@@ -21,7 +21,6 @@ const SideBarChatList: FC<SideBarChatListProps> = ({ sessionId, friends }) => {
     }
   }, [pathname]);
 
-  console.log("these are your friends", friends);
   return (
     <ul role="list" className="-mx-2 max-h-[25rem] space-y-1 overflow-y-auto">
       {friends.sort().map((friend) => {
